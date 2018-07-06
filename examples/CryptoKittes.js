@@ -1,3 +1,4 @@
+// List all crypto kitties Transfer event.
 const cs = require('co-stream');
 const Web3Wallet = require('web3-wallet');
 const { Web3EventStream } = require('../');
