@@ -7,19 +7,27 @@ class Web3EventStream extends Readable {
 
     const loadEvents = async (fromBlock, toBlock) => {
       for (let i = fromBlock; i <= toBlock; i += 64) {
-        const events = await new Promise((resolve, reject) => {
-          const e = evt(
-            filter,
-            { fromBlock: i, toBlock: Math.min(i + 63, toBlock) }
-          );
+        let events;
 
-          e.get((err, results) => {
-            if (err) reject(err);
-            else resolve(results);
+        for (let retry = 0; !events && retry < (opt.maxRetry || 3); retry++) {
+          try {
+            events = await new Promise((resolve, reject) => {
+              const e = evt(
+                filter,
+                { fromBlock: i, toBlock: Math.min(i + 63, toBlock) }
+              );
 
-            e.stopWatching(() => {});
-          });
-        });
+              e.get((err, results) => {
+                if (err) reject(err);
+                else resolve(results);
+
+                e.stopWatching(() => {});
+              });
+            });
+          } catch (e) {
+            console.error('web3-stream retry from error:', e.message);
+          }
+        }
 
         for (const event of events) {
           if (!this.push(event)) {
