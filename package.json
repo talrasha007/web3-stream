@@ -1,0 +1,31 @@
+{
+  "name": "web3-stream",
+  "version": "0.0.1",
+  "description": "streaming web3 filters & events.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talrasha007/web3-stream.git"
+  },
+  "keywords": [
+    "web3",
+    "event",
+    "filter",
+    "stream"
+  ],
+  "author": "Tal Rasha (talrasha007@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/talrasha007/web3-stream/issues"
+  },
+  "homepage": "https://github.com/talrasha007/web3-stream#readme",
+  "devDependencies": {
+    "co-stream": "^0.3.2"
+  },
+  "dependencies": {
+    "co-lodash": "^0.2.0"
+  }
+}
