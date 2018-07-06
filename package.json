@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/talrasha007/web3-stream#readme",
   "devDependencies": {
-    "co-stream": "^0.3.2"
+    "co-stream": "^0.3.2",
+    "web3-wallet": "^0.3.1"
   },
   "dependencies": {
     "co-lodash": "^0.2.0"
