@@ -37,8 +37,13 @@ class Web3EventStream extends Readable {
       }
     };
 
-    (async () => {
+    const getBlockNumber = async () => {
       const blockNumber = await web3.eth.getBlockNumber();
+      return blockNumber - (parseInt(opt.confirm) || 0);
+    };
+
+    (async () => {
+      const blockNumber = await getBlockNumber();
       let fromBlock = opt.fromBlock < 0 ? blockNumber + opt.fromBlock : opt.fromBlock;
       let toBlock = parseInt(opt.toBlock) || blockNumber;
 
@@ -46,7 +51,7 @@ class Web3EventStream extends Readable {
 
       if (opt.toBlock === 'latest' || !opt.toBlock) {
         while (!!this._read) { // same as while(true), to avoid warning in webstorm.
-          const blockNumber = await web3.eth.getBlockNumber();
+          const blockNumber = await getBlockNumber();
 
           if (blockNumber > toBlock) {
             fromBlock = toBlock + 1;

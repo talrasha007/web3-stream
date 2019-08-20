@@ -1,6 +1,6 @@
 {
   "name": "web3-stream",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "streaming web3 filters & events.",
   "main": "index.js",
   "directories": {
